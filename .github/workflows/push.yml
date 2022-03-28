@@ -9,13 +9,15 @@ jobs:
           echo "CC_TEST_REPORTER_ID=${{ secrets.CC_TEST_REPORTER_ID }}" >> $GITHUB_ENV
       - name: Download codeclimate test reporter tool
         run: curl -L -O https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+      - name: Call codeclimate before build
+        run: cc-test-reporter before-build
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
-          start: cc-test-reporter before-build && npm run e2e
+          start: npm run e2e
           # quote the url to be safe against YML parsing surprises
           wait-on: 'http://localhost:3000'
       - name: publish code coverage
