@@ -9,8 +9,8 @@ jobs:
           echo "CC_TEST_REPORTER_ID=${{ secrets.CC_TEST_REPORTER_ID }}" >> $GITHUB_ENV
       - name: Download codeclimate test reporter tool
         run: |
-          curl "https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64" -o "cc-test-reporter"
-          chmod +x cc-test-reporter
+          curl -fL https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
       - name: Call codeclimate before build
         run: ./cc-test-reporter before-build
       - name: Checkout
