@@ -4,6 +4,8 @@ jobs:
   test-deploy-run:
     runs-on: ubuntu-20.04
     steps:
+      - name: Download codeclimate test reporter tool
+        run: curl -L -O https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress run
@@ -16,6 +18,6 @@ jobs:
       - name: publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
-          CC_TEST_REPORTER_ID: fe6e43fa305179b23ece798af734101670f8c4394ab78b5ff410e523e4967b63
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageLocations: ${{github.workspace}}/coverage/lcov.info
+          coverageLocations: ${{github.workspace}}/coverage
