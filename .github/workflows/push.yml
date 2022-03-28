@@ -22,4 +22,4 @@ jobs:
           # quote the url to be safe against YML parsing surprises
           wait-on: 'http://localhost:3000'
       - name: publish code coverage
-        run: ${GITHUB_WORKSPACE}/cc-test-reporter after-build --id ${{ secrets.CC_TEST_REPORTER_ID }} -t lcov -d
+        run: ${GITHUB_WORKSPACE}/cc-test-reporter after-build --id ${{ secrets.CC_TEST_REPORTER_ID }} -t lcov -d -p ${GITHUB_WORKSPACE}/coverage
