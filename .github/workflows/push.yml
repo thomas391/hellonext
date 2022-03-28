@@ -4,6 +4,9 @@ jobs:
   test-deploy-run:
     runs-on: ubuntu-20.04
     steps:
+      - name: Setup test reporter ID
+        run: |
+          echo "CC_TEST_REPORTER_ID=${{ secrets.CC_TEST_REPORTER_ID }}" >> $GITHUB_ENV
       - name: Download codeclimate test reporter tool
         run: curl -L -O https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
       - name: Checkout
@@ -12,12 +15,8 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
-          start: npm run e2e
+          start: cc-test-reporter before-build && npm run e2e
           # quote the url to be safe against YML parsing surprises
           wait-on: 'http://localhost:3000'
       - name: publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageLocations: ${{github.workspace}}/coverage/lcov-report
+        run: cc-test-reporter after-build
