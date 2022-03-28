@@ -23,5 +23,5 @@ jobs:
           wait-on: 'http://localhost:3000'
       - name: publish code coverage
         run: |
-          ls ${GITHUB_WORKSPACE}/coverage -a
-          ${GITHUB_WORKSPACE}/cc-test-reporter after-build --id ${{ secrets.CC_TEST_REPORTER_ID }} -t lcov -d -p ${GITHUB_WORKSPACE}/coverage
+          ls ${GITHUB_WORKSPACE}/coverage/lcov-report -a
+          ${GITHUB_WORKSPACE}/cc-test-reporter after-build --id ${{ secrets.CC_TEST_REPORTER_ID }} -t lcov -d -p ${GITHUB_WORKSPACE}/coverage/lcov-report
