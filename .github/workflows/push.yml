@@ -17,3 +17,5 @@ jobs:
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: fe6e43fa305179b23ece798af734101670f8c4394ab78b5ff410e523e4967b63
+        with:
+          coverageLocations: ${{github.workspace}}/coverage/lcov.info
