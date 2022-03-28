@@ -25,4 +25,4 @@ jobs:
       - name: publish code coverage
         run: |
           ls ${GITHUB_WORKSPACE}/coverage/lcov-report -a
-          ${GITHUB_WORKSPACE}/cc-test-reporter after-build
+          ${GITHUB_WORKSPACE}/cc-test-reporter after-build -r ${{ secrets.CC_TEST_REPORTER_ID }}
