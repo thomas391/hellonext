@@ -22,6 +22,4 @@ jobs:
           # quote the url to be safe against YML parsing surprises
           wait-on: 'http://localhost:3000'
       - name: publish code coverage
-        run: |
-          export CC_TEST_REPORTER_ID=${{ secrets.CC_TEST_REPORTER_ID }}
-          ${GITHUB_WORKSPACE}/cc-test-reporter after-build
+        run: ${GITHUB_WORKSPACE}/cc-test-reporter after-build --id ${{ secrets.CC_TEST_REPORTER_ID }} -t lcov -d
